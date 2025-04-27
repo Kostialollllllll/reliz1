@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модний магазин - Товари</title>
+    <link rel="stylesheet" href="tovar.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="tovar.html">Товари</a></li>
+                    <li><a href="koshuk.html">Кошик</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Наші товари</h1>
+        
+        <div class="products">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.google.com/imgres?q=%D1%84%D1%83%D1%82%D0%B1%D0%BE%D0%BB%D0%BA%D0%B0%20%D0%B7%20%D1%82%D0%B0%D1%87%D0%BA%D0%B0%D0%BC%D0%B8&imgurl=https%3A%2F%2Fimages.prom.ua%2F2999719663_w640_h640_futbolka-s-3d.jpg&imgrefurl=https%3A%2F%2Fprom.ua%2Fp276602143-futbolka-printom-temu.html&docid=R4IgXc_pFqe_kM&tbnid=DmXL5rDoONRMvM&vet=12ahUKEwjh-4u4gfiMAxX5YPEDHZgLBXAQM3oECGkQAA..i&w=875&h=869&hcb=2&itg=1&ved=2ahUKEwjh-4u4gfiMAxX5YPEDHZgLBXAQM3oECGkQAA" alt="Футболка">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Чоловіча футболка</h3>
+                    <p class="product-price">450 грн</p>
+                    <button class="add-to-cart" onclick="addToCart('Чоловіча футболка', 450)">Додати до кошика</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.google.com/imgres?q=%D0%B4%D0%B6%D0%B8%D0%BD%D1%81%D0%B8%20%D0%BF%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%96&imgurl=https%3A%2F%2Fimages.prom.ua%2F2987204969_w640_h320_muzhskie-prikolnye-dzhinsy.jpg&imgrefurl=https%3A%2F%2Fprom.ua%2Fua%2Fp1374126555-muzhskie-prikolnye-dzhinsy.html&docid=6OeeLme6ugSqdM&tbnid=sPU2-WbOVce0BM&vet=12ahUKEwjHq8DOgfiMAxUfSPEDHdPPM8kQM3oECFEQAA..i&w=212&h=320&hcb=2&itg=1&ved=2ahUKEwjHq8DOgfiMAxUfSPEDHdPPM8kQM3oECFEQAA" alt="Джинси">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Джинси класичні</h3>
+                    <p class="product-price">1200 грн</p>
+                    <button class="add-to-cart" onclick="addToCart('Джинси класичні', 1200)">Додати до кошика</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.google.com/imgres?q=%D1%81%D1%83%D0%BA%D0%BD%D1%8F%20%D0%B2%D0%B8%D1%88%D0%B8%D0%B2%D0%B0%D0%BD%D0%BA%D0%B0&imgurl=https%3A%2F%2Fcontent1.rozetka.com.ua%2Fgoods%2Fimages%2Fbig%2F345036021.jpg&imgrefurl=https%3A%2F%2Frozetka.com.ua%2F384440790%2Fp384440790%2F&docid=Om8G8ykLA_EXZM&tbnid=XvgDN36_BDEmQM&vet=12ahUKEwili5XggfiMAxX8avEDHccpL4IQM3oECF8QAA..i&w=420&h=630&hcb=2&ved=2ahUKEwili5XggfiMAxX8avEDHccpL4IQM3oECF8QAA" alt="Сукня">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Літня сукня</h3>
+                    <p class="product-price">850 грн</p>
+                    <button class="add-to-cart" onclick="addToCart('Літня сукня', 850)">Додати до кошика</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fsezon.ua%2Fzhinoche-vzuttya%2Fzhinochi-krosivky%2Fkrossovky-rispetto-584844-belye&psig=AOvVaw3u7SOyiknBP8htnxtgpPiZ&ust=1745836491259000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLCbzt6C-IwDFQAAAAAdAAAAABAE" >
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Кросівки білі</h3>
+                    <p class="product-price">1500 грн</p>
+                    <button class="add-to-cart" onclick="addToCart('Кросівки білі', 1500)">Додати до кошика</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="contact-info">
+            <h2>Контактна інформація</h2>
+            <p>Телефон: +380 12 345 6789</p>
+            <p>Email: info@shop.com</p>
+            <p>Адреса: м. Київ, вул. Прикладна, 123</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Модний магазин. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script>
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({name, price});
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Товар додано до кошика');
+        }
+    </script>
+</body>
+</html>
