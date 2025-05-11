@@ -34,6 +34,62 @@
             <button class="checkout-btn" id="checkout-btn">Оформити замовлення</button>
         </div>
 
+        <!-- Форма замовлення -->
+        <div class="order-form" id="order-form">
+            <h2>Оформлення замовлення</h2>
+            
+            <div class="order-summary" id="order-summary">
+                <!-- Тут буде підсумок замовлення -->
+            </div>
+            
+            <form id="order-details-form">
+                <div class="form-group">
+                    <label for="name">Ім'я та прізвище *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Номер телефону *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">Місто *</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Адреса доставки *</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payment">Спосіб оплати *</label>
+                    <select id="payment" name="payment" required>
+                        <option value="">Оберіть спосіб оплати</option>
+                        <option value="cash">Накладений платіж</option>
+                        <option value="card">Оплата карткою онлайн</option>
+                        <option value="privat">Переказ на карту ПриватБанк</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Примітки до замовлення</label>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancel-order">Скасувати</button>
+                    <button type="submit" class="submit-btn">Підтвердити замовлення</button>
+                </div>
+            </form>
+        </div>
+
         <section class="contact-info">
             <h2>Контактна інформація</h2>
             <p>Телефон: +380 12 345 6789</p>
@@ -54,6 +110,10 @@
             const cartItemsContainer = document.getElementById('cart-items');
             const cartTotalContainer = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
+            const orderForm = document.getElementById('order-form');
+            const orderSummary = document.getElementById('order-summary');
+            const cancelOrderBtn = document.getElementById('cancel-order');
+            const orderDetailsForm = document.getElementById('order-details-form');
             
             function renderCart() {
                 cartItemsContainer.innerHTML = '';
@@ -93,13 +153,67 @@
                 });
             }
             
-            renderCart();
+            function renderOrderSummary() {
+                let summaryHTML = '<h3>Ваше замовлення:</h3><ul>';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    summaryHTML += `<li>${item.name} - ${item.price} грн</li>`;
+                    total += item.price;
+                });
+                
+                summaryHTML += `</ul><p><strong>Загальна сума: ${total} грн</strong></p>`;
+                orderSummary.innerHTML = summaryHTML;
+            }
             
+            // Показати форму замовлення
             checkoutBtn.addEventListener('click', function() {
-                alert('Замовлення оформлено! Дякуємо за покупку.');
+                renderOrderSummary();
+                orderForm.style.display = 'block';
+                window.scrollTo({
+                    top: orderForm.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Скасувати замовлення
+            cancelOrderBtn.addEventListener('click', function() {
+                orderForm.style.display = 'none';
+            });
+            
+            // Відправка форми замовлення
+            orderDetailsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Отримуємо дані форми
+                const formData = new FormData(this);
+                const orderData = {
+                    customer: {
+                        name: formData.get('name'),
+                        phone: formData.get('phone'),
+                        email: formData.get('email'),
+                        city: formData.get('city'),
+                        address: formData.get('address')
+                    },
+                    payment: formData.get('payment'),
+                    notes: formData.get('notes'),
+                    items: [...cart],
+                    total: cart.reduce((sum, item) => sum + item.price, 0),
+                    date: new Date().toLocaleString()
+                };
+                
+                // Тут можна додати логіку відправки даних на сервер
+                console.log('Order data:', orderData);
+                
+                // Показати повідомлення про успішне замовлення
+                alert(`Замовлення оформлено!\nОчікуйте дзвінка для підтвердження.\nНомер замовлення: #${Math.floor(Math.random() * 10000)}`);
+                
+                // Очистити кошик та повернутися на головну
                 localStorage.removeItem('cart');
                 window.location.href = 'index.html';
             });
+            
+            renderCart();
         });
     </script>
 </body>
