@@ -48,42 +48,59 @@
         </div>
     </footer>
 
-    
-<script>
-    
-document.addEventListener('DOMContentLoaded', function() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalContainer = document.getElementById('cart-total');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<div class="empty-cart">Ваш кошик порожній</div>';
-        cartTotalContainer.textContent = '';
-        checkoutBtn.style.display = 'none';
-    } else {
-        let total = 0;
-        cart.forEach(item => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'cart-item';
-            itemElement.innerHTML = `
-                <span>${item.name}</span>
-                <span>${item.price} грн</span>
-            `;
-            cartItemsContainer.appendChild(itemElement);
-            total += item.price;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            function renderCart() {
+                cartItemsContainer.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<div class="empty-cart">Ваш кошик порожній</div>';
+                    cartTotalContainer.textContent = '';
+                    checkoutBtn.style.display = 'none';
+                    return;
+                }
+                
+                let total = 0;
+                cart.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <span>${item.name}</span>
+                        <div class="cart-item-actions">
+                            <span>${item.price} грн</span>
+                            <button class="remove-btn" data-index="${index}">Видалити</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                    total += item.price;
+                });
+                
+                cartTotalContainer.textContent = `Загальна сума: ${total} грн`;
+                
+                // Add event listeners to all remove buttons
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cart.splice(index, 1);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        renderCart();
+                    });
+                });
+            }
+            
+            renderCart();
+            
+            checkoutBtn.addEventListener('click', function() {
+                alert('Замовлення оформлено! Дякуємо за покупку.');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            });
         });
-        
-        cartTotalContainer.textContent = `Загальна сума: ${total} грн`;
-        
-        checkoutBtn.addEventListener('click', function() {
-            alert('Замовлення оформлено! Дякуємо за покупку.');
-            localStorage.removeItem('cart');
-            window.location.href = 'index.html';
-        });
-    }
-});
-
-</script>
+    </script>
 </body>
 </html>
